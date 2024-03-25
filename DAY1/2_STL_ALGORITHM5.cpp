@@ -5,8 +5,8 @@
 // 장점 1. 활용도, 부분검색 실패시, last는 다름 구간의 시작
 // 장점 2. find 만들기가 쉬워지고 빨라짐.
 
-template<typename T, typename T2>
-T* find(T* first, T* last, T2 c)
+template<typename T1, typename T2>
+T1 find(T1 first, T1 last, T2 c)
 {
 	while (first != last && *first != c)
 		++first;
