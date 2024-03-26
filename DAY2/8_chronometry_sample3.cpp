@@ -3,6 +3,9 @@
 #include <list>
 #include <algorithm>
 
+// compiler 옵션에서 최적화를 꼭 써야 차이가 남.
+// vector 가 list 보다 10배 속도 차이남.
+
 constexpr std::size_t size = 10'000'000;
 
 std::vector<int> v;
