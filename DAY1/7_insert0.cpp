@@ -14,6 +14,9 @@ class List{
 // C++14까지는 class template의 타입 추론이 안됨으로 복잡해 보이는 경우가 많았음.
 // 이 경우, 아래 기법 사용
 //* class template 객체를 생성하는 함수 template 사용
+//* "Object Generator" 라고 불림.
+// class template의 instance를 만드는 function template
+// google "c++ IDioms" 검색
 template<typename T>
 List<T> make_list(int sz, T value){
     return List<T>(sz, value);
