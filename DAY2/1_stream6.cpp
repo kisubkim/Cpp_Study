@@ -18,3 +18,18 @@ void show(InputItr s, InputItr e){
     std::copy(s, e, p1);
     std::cout << std::endl;
 }
+
+int main()
+{
+    std::list<int> s{1,2,3,4,5,6,7,8,9,10};
+    int x[10]{1,2,3,4,5,6,7,8,9,10};
+
+    // container의 모든 내용 출력
+    show(s);
+    show(x);
+
+    // 반복자 ver
+    show(s.begin(), s.end());
+    show(x, x+10);
+}
+
