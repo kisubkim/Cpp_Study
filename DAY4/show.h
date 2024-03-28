@@ -29,7 +29,7 @@ public:
 
 
 template<typename F, typename ... Types>
-decltype(auto) chronometry(F&& f, Types&& ... args)
+decltype(auto) chronometry(F&& f, Types&& ... args)		// variable template
 {
 	stop_watch sw(true);
 	return std::invoke(std::forward<F>(f), std::forward<Types>(args)...);
