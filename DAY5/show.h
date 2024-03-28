@@ -12,7 +12,14 @@ class stop_watch
 	std::chrono::system_clock::time_point start;
 	bool log_at_finish;
 public:
-	stop_watch(bool b = false) : log_at_finish(b) { start = std::chrono::system_clock::now(); }
+	stop_watch(bool b = false) : log_at_finish(b)
+	{ 
+		start = std::chrono::system_clock::now(); 
+		
+	}
+
+
+
 	~stop_watch() { if (log_at_finish) log(); }
 
 	std::chrono::duration<double> stop()
@@ -29,7 +36,7 @@ public:
 
 
 template<typename F, typename ... Types>
-decltype(auto) chronometry(F&& f, Types&& ... args)		// variable template
+decltype(auto) chronometry(F&& f, Types&& ... args)
 {
 	stop_watch sw(true);
 	return std::invoke(std::forward<F>(f), std::forward<Types>(args)...);
