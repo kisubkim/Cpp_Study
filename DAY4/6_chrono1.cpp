@@ -1,6 +1,9 @@
 ﻿#include <iostream>
 #include <ratio>
 
+//^ chrono 가 가장 c++ 스런 class 중 하나.
+
+// 분수를 나타내는 class를 아래처럼 만들었다 치자.
 class Rational 
 {
 	int num;
@@ -12,11 +15,15 @@ public:
 int main()
 {
 	// r1, r2 는 같은 타입 일까요 ? 다른 타입일까요 ?
+	//? 같은 type
+	//? => Rational 이 모든 분수객체를 same type 으로 취급.
+	//? 요거는 Java style
 	Rational r1(1,10);
 	Rational r2(2,10);
 
 	
-
+	//^ c++ standard class template ==> std::ratio
+	//& 모든 분수를 다른 type 으로 취급.
 	std::ratio<1, 10> r1; // 1/10
 	std::ratio<2, 10> r2; // 2/10 => 1/5
 }

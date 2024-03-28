@@ -24,6 +24,11 @@ public:
 	{
 		return cnt == 0;
 	}
+
+	bool operator!=(const default_sentinel_t& s) const
+	{
+		return cnt != 0;
+	}
 };
 int main()
 {
