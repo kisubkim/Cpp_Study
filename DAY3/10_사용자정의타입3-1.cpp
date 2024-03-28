@@ -1,7 +1,9 @@
-﻿
-#include <vector>
+﻿#include <vector>
 #include <algorithm>
 #include "show.h"
+
+//using namespace std::rel_ops;		//& !=, <=, >=, >의 template version 제공 <-- 이거 c++17부터 못씀.
+
 class Point
 {
 public:
@@ -21,9 +23,25 @@ public:
 	{
 		std::cout << x << ", " << y << std::endl;
 	}
+
+	// 사용자 정의 타입의 비교를 위해서는 <, == 를 만들기를 권장.
+	bool operator<(const Point& other) { return x < other.x; }
+	bool operator==(const Point& other) { return x == other.x || y == other.y; }
 };
+
+
+
+template<typename T> bool operator !=(T a, T b)
+{
+	return !(a == b);
+}
 int main()
 {
+	Point p1(1,2);
+	Point p2(2,3);
+
+	bool b = p1 > p2;
+
 	std::vector<Point> v;
 
 	v.emplace_back(1, 2); // Point(1,2)
@@ -31,17 +49,7 @@ int main()
 	v.emplace_back(3, 2);
 	v.emplace_back(0, 1);
 
-	// 사용자 정의 ㅣ타입을 container 보관할 수 있지만
-	// algorithm 사용 시에는 algorithm의 requirement를 충족해야함.
-	// std::sort() 사용하기 위해서는 크기비료를 위한 cmp 가 있어야함.
-	//std::sort(std::begin(v), std::end(v));		// error
-
-	// #1. lambda 로 비교 정책전달
-	std::sort(v.begin(), v.end(), 
-			  [](const Point& p1, const Point& p2) {return p1.x < p2.x;});
-
-	// #2. Point type 자체에 < 연산자 제공.
-	// => 다음 예제 참고
+	std::sort(v.begin(), v.end());
 
 
 }
