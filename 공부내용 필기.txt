@@ -68,3 +68,20 @@ chcp 65001
 
 3일차 10 사용자정의타입2 참고해서
 생성자, 소멸자 호출되는 순서 확실하게 정리 필요.
+
+
+string_view 아주 중요함.
+
+1. 빌드
+2. 구글에ㅓ "PEView" 검색해서 PEView0.99 다운
+3. PEView 실행해서 실행파일 열기.
+
+header 쪽에서 IMAGE_NT_HEADERS -> IMAGE_OPTIONAL_HEADER 를 OS가 보고 나서
+해당 정보를 기반으로 memory를 올림.
+
+https://www.geeksforgeeks.org/ 여기 내용 읽어보기!!
+
+type_traits 이거 include 하는거 기억하기.
+
+stack : thread 당 1개
+heap, data memory, code memory : process 당 1개 (모든 thread 가 공유)
