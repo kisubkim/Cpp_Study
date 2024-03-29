@@ -11,6 +11,7 @@ std::vector<int> v;
 
 void init()
 {
+    v.reserve(sz);
     for (int i = 0; i < sz; ++i)
     {
         v.push_back(i);
@@ -29,4 +30,6 @@ int main()
 
     int s = 0;
     sum(v.begin(), v.end(), s);
+
+    std::cout << s << std::endl;
 }
