@@ -85,3 +85,7 @@ type_traits 이거 include 하는거 기억하기.
 
 stack : thread 당 1개
 heap, data memory, code memory : process 당 1개 (모든 thread 가 공유)
+
+구글에서 "c++ dclp" 검색
+https://preshing.com/20130930/double-checked-locking-is-fixed-in-cpp11/
+유툽에서 cppcon 에서 thread fence

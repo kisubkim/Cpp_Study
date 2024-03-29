@@ -90,9 +90,9 @@ int main()
 {
     init();
 
-    long long r1 = chronometry(f1); // f1의 수행시간을 출력 
-    long long r2 = chronometry(f2); // f2의 수행시간을 출력 
- 
-	std::cout << r1 << std::endl; 
-	std::cout << r2 << std::endl; 
+    long long r1 = chronometry(f1); // f1의 수행시간을 출력
+    long long r2 = chronometry(f2); // f2의 수행시간을 출력
+
+	std::cout << r1 << std::endl;
+	std::cout << r2 << std::endl;
 }
