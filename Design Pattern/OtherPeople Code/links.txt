@@ -1,0 +1,13 @@
+github.com/codenuri/ssdp
+
+godbolt.org
+c++ idioms -> idiom = 각 언어의 특징을 고려한 디자인 기법
+              design Pattern = 언어의 특징은 고려되지 않는다.
+
+
+policy base design 을 사용하면 실행시간에 교체할 수 없다. -> 시험문제
+OCP -> 시험 정답
+
+composite pattern 재귀적 표함을 사용한 복합객체 만들기 - 시험
+
+proxy vs decorator -> proxy는 원본접근 X, decorator는 원본접근 OK 0O0K
