@@ -17,6 +17,7 @@ public:
 
 
 	// template method 패턴
+	// => 변하는 것을 가상함수로 뽑은 것.
 	void draw()
 	{
 		std::cout << "lock mutex\n";

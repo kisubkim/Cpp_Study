@@ -8,7 +8,7 @@ struct IValidator
 	virtual bool validate(const std::string& s, char c) = 0;
 	virtual bool is_complete(const std::string& s) { return true; }
 	virtual ~IValidator() {}
-};
+};                                                                                                                                                                                                                                                   
 
 class LimitDigitValidator : public IValidator
 {

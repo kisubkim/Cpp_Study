@@ -7,6 +7,10 @@
 
 */
 
+class unsupported_operation {
+
+};
+
 class BaseMenu {
 	std::string title;
 public:
@@ -15,6 +19,9 @@ public:
 
 	virtual void command() = 0;
 	virtual ~BaseMenu() {}
+
+	virtual void add(BaseMenu*) { throw unsupported_operation(); }
+	virtual BaseMenu* submenu(int idx) { throw unsupported_operation(); }
 };
 
 class MenuItem : public BaseMenu {
@@ -63,6 +70,12 @@ public:
 			v[cmd - 1]->command();
 		}
 	}
+
+	BaseMenu* submenu(int idx) { return v[idx]; }
+	~PopupMenu() {
+		for (auto e : v)
+			delete e;
+	}
 };
 
 
@@ -73,33 +86,26 @@ int main()
 	PopupMenu* pm2 = new PopupMenu("해상도 변경");
 
 	root->add(pm1);
-	//root->add(pm2);
-	pm1->add(pm2);
+	root->add(pm2);
 	root->add(new MenuItem("재부팅", 12));
+	//-------------------------------------------------
 
-	pm1->add(new MenuItem("RED", 21));
-	pm1->add(new MenuItem("BLUE", 22));
+	// 모든 메뉴 객체는 사용 후 delete 되어야 한다고 해보자.
+	/*
+		방법
+			1. 스마트 포인터 사용 (std::shared_ptr) <-- 이거 사용할 줄 알면, 이게 제일 좋음
+			2. root만 delete
+				=> root의 소멸자 (~PopupMenu()) 에서
+				   자신이 가진 하위 메뉴를 다시 delete
+	*/
 
-	pm2->add(new MenuItem("HD", 31));
-	pm2->add(new MenuItem("UHD", 32));
-
-	// 이제 시작하려면??
 	root->command();
+
+	delete root;
 }
 
 
 /*
-	객체지향 프로그래밍 세계에서 "프로그램은!!"
-		1. 객체를 생성하고
-		2. 객체간의 관계를 설정하고
-		3. 객체간의 메시지를 주고 받는(서로의 멤버함수 호출) 과정이다.
-		4. 프로그램의 기본 단위는 "함수"가 아닌 "클래스(데이터 + 동작)"이다.
+	
 
-	장점
-		유연성이 좋고, 유지보수가 쉽다.
-
-	단점
-		메모리 사용량 증가하고, 결정적으로 어려움.
 */
-
-

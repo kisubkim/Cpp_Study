@@ -19,6 +19,7 @@
 
 int main()
 {
+	// C 언어 style의 menu example
 	printf("1. 김밥\n");
 	printf("2. 라면\n");
 	printf("메뉴를 선택하세요 >> ");

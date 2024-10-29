@@ -63,6 +63,8 @@ public:
 			v[cmd - 1]->command();
 		}
 	}
+
+	BaseMenu* submenu(int idx) { return v[idx]; }
 };
 
 
@@ -73,33 +75,28 @@ int main()
 	PopupMenu* pm2 = new PopupMenu("해상도 변경");
 
 	root->add(pm1);
-	//root->add(pm2);
-	pm1->add(pm2);
+	root->add(pm2);
 	root->add(new MenuItem("재부팅", 12));
+	//-------------------------------------------------
 
-	pm1->add(new MenuItem("RED", 21));
-	pm1->add(new MenuItem("BLUE", 22));
+	auto m1 = root->submenu(0);		// "색상 메뉴 객체의 포인터"
 
-	pm2->add(new MenuItem("HD", 31));
-	pm2->add(new MenuItem("UHD", 32));
+	// 아래 한줄에 대해서 생각해 봅시다.
+	//root->submenu(1)->add(new MenuItem("HD", 21));			// error
+						// submenu(1)은 "해상도 메뉴" 임으로 PopupMenu 객체가 맞음.
+						// 하지만 submenu() return type이 BaseMenu* 이다.
+						// 따라서, PopupMenu 가 추가한 멤버에는 접근 안됨.
 
-	// 이제 시작하려면??
+	/*
+		해결책
+			1. casting 사용
+	
+	*/
+	static_cast<PopupMenu*>(root->submenu(1))->add(new MenuItem("HD", 21));
+
+	// 캐스팅 없이 사용할 수 없을까?
+	// => 다음 예제.
+
 	root->command();
 }
-
-
-/*
-	객체지향 프로그래밍 세계에서 "프로그램은!!"
-		1. 객체를 생성하고
-		2. 객체간의 관계를 설정하고
-		3. 객체간의 메시지를 주고 받는(서로의 멤버함수 호출) 과정이다.
-		4. 프로그램의 기본 단위는 "함수"가 아닌 "클래스(데이터 + 동작)"이다.
-
-	장점
-		유연성이 좋고, 유지보수가 쉽다.
-
-	단점
-		메모리 사용량 증가하고, 결정적으로 어려움.
-*/
-
 

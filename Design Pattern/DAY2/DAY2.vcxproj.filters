@@ -105,5 +105,14 @@
     <ClCompile Include="0_strategy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="2_메뉴7.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="2_메뉴8.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="2_메뉴9.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
