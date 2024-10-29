@@ -38,6 +38,7 @@
 					 C++ IDioms, Java IDioms, C# Idioms
 
 	구글 "C++ IDioms" 검색 후 첫 링크 들어가서 아래로 내려가면 c++ 관련 내용 다 나옴.
+	https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms
 */
 
 template<typename T>

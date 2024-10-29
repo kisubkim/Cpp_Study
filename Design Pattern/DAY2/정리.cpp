@@ -55,4 +55,7 @@
 		5_Adapter3.cpp 에 보면 decorator 와 adapter의 차이에 대해서 적혀 있음. (전체적인 Format은 거의 동일함)
 			decorator : 기능의 추가를 위해서 사용 (Interface는 동일)
 			adapter   : Interface의 변경을 위해서 사용 (기능은 동일)
+
+	IDiom 관련 site
+	https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms
 */
