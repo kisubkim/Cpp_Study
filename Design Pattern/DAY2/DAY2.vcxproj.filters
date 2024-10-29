@@ -21,10 +21,10 @@
     <ClCompile Include="1_단위전략2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1_단위전략3.cpp">
+    <ClCompile Include="1_단위전략4.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="1_단위전략4.cpp">
+    <ClCompile Include="1_단위전략3.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="1_단위전략6.cpp">
@@ -112,6 +112,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="2_메뉴9.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="4_Decorator8.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="5_Adapter7.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="5_Adapter8.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
