@@ -13,6 +13,14 @@ public:
 };
 Server server;
 
+/// <summary>
+///  Client 가 접속 (Message를 보내서 Server가 받으면) 하면 Logging을 남기고,
+/// 전달 받은 Message를 사용하여 계산을 진행함.
+/// </summary>
+/// <param name="code"> 계산하고자 하는 type을 정함. Add, Sub</param>
+/// <param name="a"></param>
+/// <param name="b"></param>
+/// <returns></returns>
 int handler(int code, int a, int b)
 {
 	printf("메세지 도착 : %d, %d, %d\n", code, a, b);
@@ -26,7 +34,8 @@ int handler(int code, int a, int b)
 int main()
 {
 	// IPC 서버로 시작
-	ec_start_server("Calc", &handler);
+	ec_start_server("Calc" /* Server Name */, &handler /* Client 접속 시 이 함수가 호출됨.*/);
+													   // 단, Client는 Server에게 int 3개를 전달함.
 }
 
 

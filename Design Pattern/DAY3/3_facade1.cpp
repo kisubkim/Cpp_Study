@@ -5,6 +5,19 @@
 #pragma comment(lib, "ws2_32.lib")
 using namespace std;
 
+/*
+	C 언어로 만든 TCP server(network) 입니다.
+	
+		1. C 언어는 Data와 Function이 분리되어 있기 때문에
+			=> Data를 따로 초기화 한 다음에 Function Arg 로 보내야 함.
+		2. 생성자가 없음으로 자동 초기화가 안됨.
+
+	그래서, C code는 복잡해 보임.
+	Data 와 Fuction 을 묶는 class로 만들면 간단해 보임.
+*/
+
+
+
 int main()
 {
 	// 1. 네트워크 라이브러리 초기화

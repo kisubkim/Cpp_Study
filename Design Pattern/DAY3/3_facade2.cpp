@@ -5,6 +5,12 @@
 using namespace std;
 
 
+/*
+	SRP (Single Responsibility Principle)
+		=> 하나의 클래스는 하나의 책임만 있어야 한다.
+
+*/
+
 
 class NetworkInit
 {
@@ -39,6 +45,8 @@ public:
 };
 
 // Socket 작업을 책임지는 클래스
+// 얼핏보면 여기가 복잡해 보이는데...설계자들은 좀 복잡해도 괜찮음.
+// 대신 사용자들이 편해지자늠....UI 개념과 상통함.
 class Socket
 {
 	int sock;
@@ -59,6 +67,11 @@ public:
 		accept(sock, (SOCKADDR*)&addr2, &sz);
 	}
 };
+
+/*
+	Library 설계자들이 위처럼 만들어 주면 최종 사용자는 아래처럼 사용.
+	facade1.cpp 보다는 아주 간결. => 객체지향의 장점.
+*/
 
 int main()
 {
