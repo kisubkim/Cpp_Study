@@ -37,4 +37,9 @@
 				// 사용자 ============ Calc  =============> 원격지 서버
 											-- 의도 : 다양한 의도를 가진 대신 사용한는 객체. "Proxt"
 
+
+		★★console 에서 Dynamic Library 만드는 방법★★
+			Developer Command Window 에서 
+				cl ~~~.cpp /LD 하면 해당 cpp 로 dll 파일 만듬.
+
 */
