@@ -1,0 +1,102 @@
+﻿#include <iostream>
+#include <vector>
+#include <map>
+#include "Helper.h"
+
+class Shape
+{
+public:
+	virtual void draw() = 0;
+	virtual ~Shape() {}
+};
+
+class Rect : public Shape
+{
+public:
+	void draw() override { std::cout << "draw Rect" << std::endl; }
+	// 자신의 객체를 만드는 "static member function"은 아주 유명한 기술
+	//	=> 장점이 너무 많음.
+	static Shape* create() { return new Rect; }
+};
+
+/*
+	Rect를 만드는 2가지 방법
+		1. Shape* rc = new Rect;			<--- 반드시 class name 을 알아야함.
+		2. Shape* rc = Rect::create()		<--- 여기는 class name 을 몰라도 함수포인터만 아련 객체 생성 가능하게 할 수 있음.
+
+	C++언어는 "Class Name"을 자료구조에 보관할 수 없음.
+
+	v.push_back("Rect");	// class name이 아닌 문자열 보관
+							// 문자열로는 객체생성 안됨.
+
+	하.지.만 함수 포인터는 자료구조게 보관 가능하고, 인자로 전달도 가능.
+	v.push_back(&Rect::create);		// 보관된 주소로 Rect 객체 생성가능.
+									// 결국 "class"를 보관한 것도 비슷한 의미
+*/
+
+class Circle : public Shape
+{
+public:
+	void draw() override { std::cout << "draw Circle" << std::endl; }
+	static Shape* create() { return new Circle; }
+};
+
+class ShapeFactory
+{
+	MAKE_SINGLETON(ShapeFactory)
+		using CREATOR = Shape * (*)();		// 함수 포인터 타입
+	inline static std::map<int, CREATOR> create_map;
+public:
+	void register_shape(int key, CREATOR c) {
+		create_map[key] = c;
+	}
+
+	// 아래처럼 수정된 내용을 보면 어디에도 class name을 사용하지 않았음. (결국 추가해도 나중에 변경될 이유가 없음)
+	Shape* create(int key)
+	{
+		Shape* p = nullptr;
+
+		auto it = create_map.find(key);
+		if (it != create_map.end()) {
+			p = it->second();		// map 의 반복자는 std::pair pointer
+									// pair 의 first 는 키값(int), pair second 는 value(함수포인터)
+		}
+
+		
+		return p;
+	}
+};
+
+
+int main()
+{
+	std::vector<Shape*> v;
+
+	ShapeFactory& factory = ShapeFactory::get_instance();
+
+	// 공장에 제품을 등록
+	factory.register_shape(1, &Rect::create);
+	factory.register_shape(2, &Circle::create);
+
+	while (1) {
+		int cmd;
+		std::cin >> cmd;
+
+		if (cmd > 0 && cmd < 8) {		// 1 ~ 7을 도형의 번호로 예약
+			Shape* s = factory.create(cmd);
+
+			if (s != nullptr) {
+				v.push_back(s);
+			}
+		}
+		else if (cmd == 9) {
+			for (int i = 0; i < v.size(); i++) {
+				v[i]->draw();
+			}
+		}
+	}
+}
+
+
+
+
