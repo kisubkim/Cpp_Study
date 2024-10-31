@@ -84,7 +84,7 @@
     <ClCompile Include="7_visitor2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="7_visitor3.cpp">
+    <ClCompile Include="7_visitor5.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="7_visitor4.cpp">
@@ -112,6 +112,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="6_iterator9.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="7_visitor3.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

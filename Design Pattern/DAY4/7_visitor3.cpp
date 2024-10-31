@@ -1,104 +1,77 @@
-ï»¿#include <iostream>
-#include <string>
+#include <iostream>
+#include <list>
 #include <vector>
-#include <conio.h> 
 
-
-class BaseMenu
-{
-	std::string title;
-public:
-	BaseMenu(const std::string& title) : title(title) {}
-	virtual ~BaseMenu() {}
-
-	std::string get_title() const { return title; }
-	
-	void set_title(const std::string& s) { title = s; }
-
-	virtual void command() = 0;
+template<typename T>
+struct IVisitor {
+	virtual void visit(T&) = 0;
+	virtual ~IVisitor() {}
 };
 
+template<typename T>
+class TwiceVisitor : public IVisitor<T> {
+public :
+	void visit(T& e) override { e *= 2; }
+};
 
-class MenuItem : public BaseMenu
-{
-	int id;
-public:
-	MenuItem(const std::string& title, int id) : BaseMenu(title), id(id) {}
-
-	void command() override
-	{
-		std::cout << get_title() << " ë©”ë‰´ê°€ ì„ íƒë¨" << std::endl;
-		_getch();
+template<typename T>
+class ShowVisitor : public IVisitor<T> {
+	void visit(T& visitor) override {
+		std::cout << visitor << " ";
 	}
 };
 
-class PopupMenu : public BaseMenu
-{
-	std::vector<BaseMenu*> v;
+template<typename T>
+class ZeroVisitor : public IVisitor<T> {
+	void visit(T& visitor) override {
+		visitor = 0;
+	}
+};
+
+template<typename T>
+struct IContainter {
+	virtual void accept(IVisitor<T>*) = 0;
+	virtual ~IContainter() {}
+};
+
+template<typename T>
+class MyList : public std::list<T>, public IContainter<T> {
 public:
-	PopupMenu(const std::string& title) : BaseMenu(title) {}
+	using std::list<T>::list;
 
-	void add_menu(BaseMenu* p) { v.push_back(p); }
-
-	void command() override
-	{
-		while (1)
-		{
-			system("cls");
-
-			int sz = v.size();
-
-			for (int i = 0; i < sz; i++)
-			{
-				std::cout << i + 1 << ". " << v[i]->get_title() << std::endl;
-			}
-
-			std::cout << sz + 1 << ". ì¢…ë£Œ" << std::endl;
-
-			int cmd;
-			std::cout << "ë©”ë‰´ë¥¼ ì„ íƒí•˜ì„¸ìš” >> ";
-			std::cin >> cmd;
-
-			if (cmd < 1 || cmd > sz + 1)
-				continue;
-
-			if (cmd == sz + 1)
-				break;
-
-			v[cmd - 1]->command(); 
+	void accept(IVisitor<T>* visitor) override {
+		for (auto& e : *this) {
+			visitor->visit(e);
 		}
-
 	}
-
 };
-
-
-
-
-
 
 int main()
 {
-	PopupMenu* root = new PopupMenu("ROOT");
-	PopupMenu* pm1 = new PopupMenu("í•´ìƒë„ ë³€ê²½");
-	PopupMenu* pm2 = new PopupMenu("ìƒ‰ìƒ ë³€ê²½");
+	//std::list<int> s(10, 0);		// ok. std::list ¿¡´Â ÀÎÀÚ 2°³ »ı¼ºÀÚ ÀÖÀ½.
 
-	root->add_menu(pm1);
-	root->add_menu(pm2);
+	MyList<int> s = { 1,2,3,4,5,6,7,8,9,10 };		// error MyList<int> ¿¡´Â ÀÎÀÚ 2°³ »ı¼ºÀÚ°¡ ¾øÀ½.
 
+	ShowVisitor<int> sv;
+	s.accept(&sv);
+	std::cout << std::endl;
 
-	pm1->add_menu(new MenuItem("HD", 11));
-	pm1->add_menu(new MenuItem("FHD", 12));
-	pm1->add_menu(new MenuItem("UHD", 13));
+	TwiceVisitor<int> tv;
+	s.accept(&tv);
+	s.accept(&sv);
+	std::cout << std::endl;
 
-	pm2->add_menu(new MenuItem("RED", 21));
-	pm2->add_menu(new MenuItem("GREEN", 22));
-	pm2->add_menu(new MenuItem("BLUE", 23));
-
-
-	root->command();
-
+	ZeroVisitor<int> zv;		// ¸ğµç ¿ä¼Ò¸¦ 0À¸·Î ÇÏ´Â ¹æ¹®ÀÚ.
+	s.accept(&zv);
+	s.accept(&sv);
+	std::cout << std::endl;
+	
+	/*
+		ÇöÀç±îÁö ¹æ¹®ÀÚ ÀÇ¹Ì
+			=> ¿ÜºÎ¿¡¼­ ¿­°ÅÇÏ´Â °ÍÀÌ ¾Æ´Ï¶ó ¿ÜºÎ¿¡¼­ "¿ä¼Ò¿¡ ´ëÇÑ ¿¬»êÀÇ Á¤ÀÇ¸¸ Àü´ŞÇÏ°Ú´Ù"´Â °Í.
+	*/
 }
+
 
 
 
