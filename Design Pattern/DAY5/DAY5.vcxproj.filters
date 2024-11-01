@@ -107,5 +107,11 @@
     <ClCompile Include="function2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="정리.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SOLID.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
