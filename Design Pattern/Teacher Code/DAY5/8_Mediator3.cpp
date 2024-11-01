@@ -1,19 +1,14 @@
 ﻿#include <iostream>
 #include <conio.h>
 
-/*
-	가입창을 보면, 모든 필수 항목이 차있어야 가입 버튼을 누를 수 있음.
-
-	이때, 각 Controlor 들은 각자 자신이 값이 있다고 중재자(mediator)에게 알려주고,
-	중재자가 가입 버튼 활성화 여부를 판단한다.
-*/
-
 // 중재자의 인터페이스
 struct IMediator
 {
 	virtual void ChangeState() = 0;
 	virtual ~IMediator() {}
 };
+
+// GUI 라이브러리 설계시 중재자를 고려한 설계
 
 class CheckBox
 {
@@ -82,13 +77,14 @@ public:
 
 int main()
 {
-	// Dialog 위의 모든 control
-	//		=> 핵심 : control 은 서로를 알 필요없음.
+	// Dialog 위의 모든 컨트롤
+	// => 핵심 : 컨트롤은 서로를 알필요 없습니다.
 	CheckBox c1, c2;
 	RadioBox r1, r2;
 
-	// 각 control 의 상태가 변경될 때 통보될 "중재자 객체"
-	//		=> 중재자는 모든 컨트롤(협력자)를 알아야 한다.
+	// 각 컨트롤의 상태가 변경될때 
+	// 통보될 "중재자 객체"
+	// => 중재자는 모든 콘트롤(협력자)를 알아야 합니다
 	LogInMediator m(&c1, &c2, &r1, &r2);
 
 	_getch(); c1.SetCheck(true);

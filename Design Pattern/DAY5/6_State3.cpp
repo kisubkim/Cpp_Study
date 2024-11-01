@@ -100,3 +100,23 @@ int main()
 	Strategy Pattern 과 유사해 보임. 그런데 아마 의도가 다를 것 같기는 함.
 */
 
+/*
+	아래 3개 pattern 은 class diagram 이 동일함.
+		>> 모두 변하는 것을 다른 클래스로 분리
+		>> 왜, 어떤 의도로 무엇을 분리하는 것인가?
+
+		1. strategy	: 객체가 사용하는 ★Algorithm 교체★
+		   (전략패턴)  ★외부★ 에서 변경하는 경우가 많음.
+					  ex> edit.set_validator(&v1)
+					      edit.set_validator(&v2)
+
+		2. state	: 객체의 ★대부분의 모든 동작 교체★
+		   (상태패턴)  객체의 상태에 따라 ★내부적★ 으로 교체
+					  ex> 자판기.insert_coin(100);		// 이 순간 모든 동작 교체
+					      캐릭터.acquire_item()			// 이 순간 물약 효과 적용
+
+		3. builder	: 복잡한 객체를 만드는데, 동일한 공정으로 만든다.
+					  각 공정의 단계는 변경될 수 있다.
+
+*/
+
